@@ -13,26 +13,67 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #f0f0f0;
+      background: radial-gradient(circle at 10% 0%, #eef1ff 0%, #f4f5f7 45%, #f4f5f7 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 24px 16px;
+      color: #1a1a1a;
+    }
+
+    /* ── Page wrap ── */
+    .page {
+      width: 100%;
+      max-width: 640px;
+    }
+
+    .page-header {
+      margin-bottom: 22px;
+      padding: 0 4px;
+    }
+
+    .page-header .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #4f46e5;
+      background: #eef1ff;
+      border: 1px solid #e0e4ff;
+      padding: 4px 10px;
+      border-radius: 999px;
+      letter-spacing: .02em;
+      margin-bottom: 12px;
+    }
+
+    .page-header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -.01em;
+      margin-bottom: 6px;
+    }
+
+    .page-header p {
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.5;
     }
 
     /* ── Card ── */
     .card {
       background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 1px 4px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
+      border-radius: 16px;
+      box-shadow: 0 1px 4px rgba(15,23,42,.06), 0 12px 32px rgba(15,23,42,.08);
+      border: 1px solid #eef0f3;
       width: 100%;
-      max-width: 660px;
       padding: 20px 20px 24px;
     }
 
     @media (min-width: 480px) {
-      .card { padding: 28px 32px 32px; }
+      .card { padding: 30px 32px 32px; }
     }
 
     /* ── Banner ── */
@@ -42,9 +83,9 @@
       gap: 10px;
       background: #fefce8;
       border: 1px solid #fde68a;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 12px 16px;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
     }
 
     .banner svg {
@@ -59,9 +100,18 @@
       line-height: 1.4;
     }
 
-    /* ── Form fields ── */
+    /* ── Section labels ── */
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 12px;
+    }
+
     .field {
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     label {
@@ -77,13 +127,14 @@
       width: 100%;
       height: 46px;
       border: 1px solid #d1d5db;
-      border-radius: 7px;
+      border-radius: 9px;
       padding: 0 12px;
       font-size: 16px; /* 16px prevents iOS zoom on focus */
       color: #111827;
       background: #fff;
       outline: none;
       transition: border-color .15s, box-shadow .15s;
+      font-family: inherit;
     }
 
     @media (min-width: 480px) {
@@ -99,7 +150,83 @@
     input[type="text"]:focus,
     input[type="tel"]:focus {
       border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99,102,241,.14);
+    }
+
+    /* ── Agent cards ── */
+    .agent-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    @media (min-width: 480px) {
+      .agent-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .agent-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      text-align: left;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 14px;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color .15s, box-shadow .15s, background .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .agent-card:hover {
+      border-color: #c7ccf5;
+      background: #fafaff;
+    }
+
+    .agent-card.selected {
+      border-color: #6366f1;
+      background: #f5f6ff;
       box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+    }
+
+    .agent-card .icon {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #eef1ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+    }
+
+    .agent-card.selected .icon {
+      background: #6366f1;
+    }
+
+    .agent-card .agent-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 3px;
+    }
+
+    .agent-card .agent-desc {
+      font-size: 12.5px;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+
+    .agent-grid.loading .agent-card {
+      opacity: .5;
+    }
+
+    .placeholder-note {
+      font-size: 13px;
+      color: #9ca3af;
+      padding: 6px 2px 20px;
     }
 
     /* ── Phone row ── */
@@ -107,14 +234,14 @@
       display: flex;
       gap: 0;
       border: 1px solid #d1d5db;
-      border-radius: 7px;
+      border-radius: 9px;
       overflow: hidden;
       transition: border-color .15s, box-shadow .15s;
     }
 
     .phone-row:focus-within {
       border-color: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+      box-shadow: 0 0 0 3px rgba(99,102,241,.14);
     }
 
     .country-selector {
@@ -147,6 +274,23 @@
       box-shadow: none;
     }
 
+    /* ── Dynamic variables section ── */
+    .variables-section {
+      background: #f9fafb;
+      border: 1px solid #eef0f3;
+      border-radius: 12px;
+      padding: 16px 16px 4px;
+      margin-top: -4px;
+      margin-bottom: 22px;
+    }
+
+    .variables-heading {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #4f46e5;
+      margin-bottom: 14px;
+    }
+
     /* ── Button ── */
     .trigger-btn {
       display: flex;
@@ -155,35 +299,37 @@
       gap: 8px;
       width: 100%;
       height: 50px;
-      margin-top: 24px;
+      margin-top: 6px;
       border: none;
-      border-radius: 8px;
-      background: #6b7280;
+      border-radius: 10px;
+      background: #4f46e5;
       color: #fff;
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
-      transition: background .15s, opacity .15s;
+      transition: background .15s, opacity .15s, transform .1s;
       letter-spacing: .01em;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
+      box-shadow: 0 4px 14px rgba(79,70,229,.28);
     }
 
     @media (min-width: 480px) {
-      .trigger-btn { height: 46px; font-size: 15px; margin-top: 28px; }
+      .trigger-btn { height: 46px; font-size: 15px; }
     }
 
     .trigger-btn:hover:not(:disabled) {
-      background: #4b5563;
+      background: #4338ca;
     }
 
     .trigger-btn:active:not(:disabled) {
-      background: #374151;
+      transform: scale(.99);
     }
 
     .trigger-btn:disabled {
-      opacity: .65;
+      opacity: .55;
       cursor: not-allowed;
+      box-shadow: none;
     }
 
     /* spinner */
@@ -249,43 +395,58 @@
 </head>
 <body>
 
-<div class="card">
+<div class="page">
 
-  <!-- Banner -->
-  <div class="banner">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10"/>
-      <line x1="12" y1="8" x2="12" y2="12"/>
-      <line x1="12" y1="16" x2="12.01" y2="16"/>
-    </svg>
-    <span class="banner-text">Calls can only be triggered from 9 AM to 9 PM IST</span>
+  <div class="page-header">
+    <div class="eyebrow">📞 Alterity Voice Agents</div>
+    <h1>Test a voice agent</h1>
+    <p>Pick an agent, drop in a phone number, and see how it handles the call.</p>
   </div>
 
-  <!-- Candidate name -->
-  <div class="field">
-    <label for="candidate-name">Candidate name</label>
-    <input type="text" id="candidate-name" placeholder="Enter candidate name" autocomplete="name" />
-  </div>
+  <div class="card">
 
-  <!-- Phone -->
-  <div class="field">
-    <label>Phone number</label>
-    <div class="phone-row">
-
-      <div class="country-selector">
-        <span class="country-flag" id="selFlag">🇮🇳</span>
-      </div>
-
-      <input type="tel" id="phone-number" placeholder="Enter phone number" autocomplete="tel-national" />
+    <!-- Banner -->
+    <div class="banner">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <span class="banner-text">Calls can only be triggered from 9 AM to 9 PM IST</span>
     </div>
+
+    <!-- Agent picker -->
+    <div class="section-label">Choose an agent</div>
+    <div class="agent-grid loading" id="agentGrid">
+      <div class="placeholder-note">Loading agents…</div>
+    </div>
+
+    <!-- Phone -->
+    <div class="field">
+      <label>Phone number</label>
+      <div class="phone-row">
+
+        <div class="country-selector">
+          <span class="country-flag" id="selFlag">🇮🇳</span>
+        </div>
+
+        <input type="tel" id="phone-number" placeholder="Enter phone number" autocomplete="tel-national" />
+      </div>
+    </div>
+
+    <!-- Dynamic per-agent variables -->
+    <div class="variables-section" id="variablesSection" hidden>
+      <div class="variables-heading">Call details for this agent</div>
+      <div id="variablesFields"></div>
+    </div>
+
+    <!-- Button -->
+    <button class="trigger-btn" id="triggerBtn" type="button" disabled>
+      <div class="spinner"></div>
+      <span class="btn-label">Trigger call</span>
+    </button>
+
   </div>
-
-  <!-- Button -->
-  <button class="trigger-btn" id="triggerBtn" type="button">
-    <div class="spinner"></div>
-    <span class="btn-label">Trigger call</span>
-  </button>
-
 </div>
 
 <!-- Toast container -->
@@ -293,7 +454,11 @@
 
 <script>
   /* ── Config ── */
-  const EDGE_FUNCTION_URL = "https://fmkqadjrfheoptcwqdqo.supabase.co/functions/v1/trigger-call";
+  const LIST_AGENTS_URL  = "https://fmkqadjrfheoptcwqdqo.supabase.co/functions/v1/list-agents";
+  const TRIGGER_CALL_URL = "https://fmkqadjrfheoptcwqdqo.supabase.co/functions/v1/trigger-call";
+
+  let agents = [];
+  let selectedAgentId = null;
 
   /* ── Toast helper ── */
   function showToast(msg, type = "") {
@@ -305,26 +470,131 @@
     setTimeout(() => t.remove(), 3500);
   }
 
+  function humanizeLabel(name) {
+    return name
+      .split(".")
+      .join(" › ")
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+  }
+
+  const agentGrid         = document.getElementById("agentGrid");
+  const variablesSection  = document.getElementById("variablesSection");
+  const variablesFields   = document.getElementById("variablesFields");
+  const btn               = document.getElementById("triggerBtn");
+
+  /* ── Render variable inputs for the selected agent ── */
+  function renderVariableFields(agent) {
+    variablesFields.innerHTML = "";
+
+    if (!agent || !agent.variables || agent.variables.length === 0) {
+      variablesSection.hidden = true;
+      return;
+    }
+
+    variablesSection.hidden = false;
+
+    agent.variables.forEach((varName) => {
+      const wrap = document.createElement("div");
+      wrap.className = "field";
+
+      const label = document.createElement("label");
+      label.setAttribute("for", "var-" + varName);
+      label.textContent = humanizeLabel(varName);
+
+      const input = document.createElement("input");
+      input.type = "text";
+      input.id = "var-" + varName;
+      input.dataset.varName = varName;
+      input.placeholder = `Enter ${humanizeLabel(varName).toLowerCase()}`;
+
+      wrap.appendChild(label);
+      wrap.appendChild(input);
+      variablesFields.appendChild(wrap);
+    });
+  }
+
+  function selectAgent(agentId) {
+    selectedAgentId = agentId;
+    document.querySelectorAll(".agent-card").forEach((card) => {
+      card.classList.toggle("selected", card.dataset.agentId === agentId);
+    });
+    const agent = agents.find((a) => a.id === agentId);
+    renderVariableFields(agent);
+    btn.disabled = false;
+  }
+
+  function renderAgentGrid() {
+    agentGrid.classList.remove("loading");
+    agentGrid.innerHTML = "";
+
+    agents.forEach((agent) => {
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "agent-card";
+      card.dataset.agentId = agent.id;
+
+      card.innerHTML = `
+        <div class="icon">${agent.icon || "🤖"}</div>
+        <div>
+          <div class="agent-name">${agent.name}</div>
+          <div class="agent-desc">${agent.description || ""}</div>
+        </div>
+      `;
+
+      card.addEventListener("click", () => selectAgent(agent.id));
+      agentGrid.appendChild(card);
+    });
+  }
+
+  /* ── Load agents ── */
+  async function loadAgents() {
+    try {
+      const res = await fetch(LIST_AGENTS_URL);
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+
+      agents = data.agents || [];
+
+      if (agents.length === 0) {
+        agentGrid.classList.remove("loading");
+        agentGrid.innerHTML = '<div class="placeholder-note">No agents found.</div>';
+        return;
+      }
+
+      renderAgentGrid();
+    } catch (err) {
+      agentGrid.classList.remove("loading");
+      agentGrid.innerHTML = '<div class="placeholder-note">Couldn’t load agents.</div>';
+      showToast(`Failed to load agents: ${err.message}`, "error");
+    }
+  }
+
+  loadAgents();
+
   /* ── Trigger call ── */
-  const btn = document.getElementById("triggerBtn");
-
   btn.addEventListener("click", async () => {
-    const candidateName = document.getElementById("candidate-name").value.trim();
-    const phone         = document.getElementById("phone-number").value.trim();
+    const phone = document.getElementById("phone-number").value.trim();
 
-    if (!candidateName) { showToast("Please enter a candidate name.", "error"); return; }
-    if (!phone)         { showToast("Please enter a phone number.", "error");   return; }
+    if (!selectedAgentId) { showToast("Please select an agent.", "error");      return; }
+    if (!phone)           { showToast("Please enter a phone number.", "error"); return; }
 
     const fullPhone = "+91" + phone.replace(/\D/g, "");
+
+    const variables = {};
+    variablesFields.querySelectorAll("input[data-var-name]").forEach((input) => {
+      variables[input.dataset.varName] = input.value.trim();
+    });
 
     btn.disabled = true;
     btn.classList.add("loading");
 
     try {
-      const res = await fetch(EDGE_FUNCTION_URL, {
+      const res = await fetch(TRIGGER_CALL_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ candidateName, phone: fullPhone }),
+        body: JSON.stringify({ agentId: selectedAgentId, phone: fullPhone, variables }),
       });
 
       const data = await res.json();
@@ -334,8 +604,8 @@
       }
 
       showToast("Call triggered successfully!", "success");
-      document.getElementById("candidate-name").value  = "";
-      document.getElementById("phone-number").value    = "";
+      document.getElementById("phone-number").value = "";
+      variablesFields.querySelectorAll("input[data-var-name]").forEach((input) => (input.value = ""));
     } catch (err) {
       showToast(`Failed to trigger call: ${err.message}`, "error");
     } finally {

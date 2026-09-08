@@ -24,6 +24,10 @@ const AGENT_META: Record<string, { description: string; icon: string }> = {
     description: "Calls as \"Monica\", a collections officer from Alterity Credit Card Services, to inform a customer of their outstanding balance and secure a repayment plan.",
     icon: "💳",
   },
+  "58bfbf4e-03c6-415d-80af-e72974529c40": { // COD Confirmation Agent
+    description: "Calls as \"Amit\" from Alterity Retail Store to confirm a Cash on Delivery order and either lock in the delivery timeline or capture a reschedule.",
+    icon: "📦",
+  },
 };
 
 const ALLOWED_AGENT_IDS = new Set(Object.keys(AGENT_META));
